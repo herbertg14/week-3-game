@@ -170,24 +170,10 @@ function playGame(object){
 			played = true;
 			audioLoss.play();
 		}
-
-		// if (playAgain == true){
-		// 	reset(object2);
-		// 	// playGame(object2);
-		// 	playAgain = false;
-		// }
 	}
 }
 
-// function main(){
-// 	var winCounter = 0;
-// 	var lossCounter = 0;
-
-// 	playGame(object1)
-// 	console.log("finished the game");
-// }
 
 pick()
 
-// main()
 
