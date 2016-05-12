@@ -44,16 +44,16 @@ function pick(){
 
 	//pass object based on random number picked
 	if (number == 1){
-		playGame(object1)
+		return (object1)
 	}
 	else if (number == 2){
-		playGame(object2)
+		return (object2)
 	}
 	else if (number == 3){
-		playGame(object3)
+		return (object3)
 	}
 	else if (number == 4){
-		playGame(object4)
+		return (object4)
 	}
 }
 
@@ -121,7 +121,10 @@ function checkGuess(object, guess){
 }
 
 function reset(object){
-
+	object.blankAndLetters = [];
+	object.guessesLeft = 7;
+	object.gotWord = false;
+	object.failed = false;
 	//reset the display for a new word
 	object.wordArray = object.word.split("");
 
@@ -134,7 +137,7 @@ function reset(object){
 	document.getElementById("wrongGuesses").innerHTML = "Wrong Guesses: ";
 }
 
-function playGame(object){
+function playGame(){
 	var winCounter = 0;
 	var lossCounter = 0;
 	var played = false;
@@ -142,7 +145,10 @@ function playGame(object){
 	var audioWin = new Audio('http://fightsongsringtone.com/files/Texas__Texas_Fight.mp3');
 	var audioLoss = new Audio("../images/fail.mp3");
 
+	var object = pick();
+
 	reset(object);
+
 
 	document.onkeyup = function(event){
 		var userGuess = String.fromCharCode(event.keyCode).toLowerCase();
@@ -159,8 +165,10 @@ function playGame(object){
 			document.getElementById("winCounter").innerHTML = winCounter
 			played = true;
 			audioWin.play();
-			// var playAgain = alert("want to play again");
-			// return false;
+			object = pick();
+			reset(object);
+			played = false;
+			// playGame();
 		}
 
 		else if (object.failed == true && played == false){
@@ -169,11 +177,15 @@ function playGame(object){
 			document.getElementById("lossCounter").innerHTML = lossCounter
 			played = true;
 			audioLoss.play();
+			object = pick();
+			reset(object);
+			played = false;
+			// playGame();
 		}
 	}
 }
 
-
-pick()
+playGame();
+// pick()
 
 
